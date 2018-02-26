@@ -1,0 +1,2 @@
+go get github.com/mediocregopher/radix.v2/redis
+export PATH=/usr/local/go/bin:$PATH
