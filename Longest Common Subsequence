@@ -1,0 +1,52 @@
+/******************************************************************************
+
+*******************************************************************************/
+
+#include <iostream>
+#include<cstring>
+
+using namespace std;
+int max(int i, int j){
+    return (i>j)? i:j;
+}
+int longestcommonsubseq(string & a, string & b){
+    int alength = a.size()+1; /*+1 is to to accomodate 0 lenght string*/
+    int blength = b.size()+1;
+    
+    int strmatrix [alength][blength]; /*Decalre a 2D matrix with sizeof strings+1*/
+    for (int i=0; i < alength; i++){  /*Initialize matrix with 0*/
+        for(int j=0; j < blength; j++){
+             strmatrix[i][j]=0;
+             
+        }
+    }
+    std::cout<<alength*blength<<std::endl;
+    
+    for (int i=1; i < alength; i++){
+        for(int j=1; j < blength; j++){
+            
+            std::cout<<a[i-1]<<" "<<b[j-1]<<std::endl;
+            std::cout<<i<<" "<<j<<std::endl;
+            
+            if(a[i-1] == b[j-1])
+             strmatrix[i][j] =(strmatrix[i-1][j-1])+1; /*If there is a match between characters then increment the count by 1 than the previous cell's count*/ 
+            else 
+             strmatrix[i][j] = max(strmatrix[i][j-1],strmatrix[i-1][j]);  /*If there is no match then just copy the value from previous cell as it is*/
+            
+            std::cout<<strmatrix[i][j]<<" "<<strmatrix[i][(j-1)]<<std::endl; 
+        }
+    }
+    return strmatrix[alength-1][blength-1];
+}
+
+int main()
+{
+    int longcomsubseq = 0;
+    string a = "abcvdefgh";
+    string b = "bqdrcvefgh";
+    longcomsubseq = longestcommonsubseq(a, b);
+    std::cout << "The lenght of the longest common subsequence is "<<longcomsubseq<< std::endl;
+    return 0;
+}
+
+
